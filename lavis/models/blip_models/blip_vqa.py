@@ -315,7 +315,7 @@ class BlipVQA(BlipBase):
             dim=1, index=answer_first_token
         )
         topk_probs, topk_ids = prob_first_token.topk(num_ans_candidates, dim=1)
-
+        # print(topk_probs)
         # answer input: [num_question*k, answer_len]
         input_ids = []
         input_atts = []
@@ -342,16 +342,20 @@ class BlipVQA(BlipBase):
             return_dict=True,
             reduction="none",
         )
-
+        #print(output)
         log_probs_sum = -output.loss
         log_probs_sum = log_probs_sum.view(num_ques, num_ans_candidates)
 
+        #print(topk_ids)
+        #print(log_probs_sum)
         max_topk_ids = log_probs_sum.argmax(dim=1)
         max_ids = topk_ids[max_topk_ids >= 0, max_topk_ids]
 
         answers = [answer_list[max_id] for max_id in max_ids]
 
-        return answers
+        # DAN: calc image embeddings
+        image_embeds = self.visual_encoder.forward_features(samples["image"])
+        return answers, log_probs_sum, topk_ids, image_embeds
 
     @classmethod
     def from_config(cls, cfg=None):
