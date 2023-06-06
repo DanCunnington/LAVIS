@@ -38,6 +38,7 @@ class BlipVQA(BlipBase):
         "vqav2": "configs/models/blip_vqav2.yaml",
         "okvqa": "configs/models/blip_vqa_okvqa.yaml",
         "aokvqa": "configs/models/blip_vqa_aokvqa.yaml",
+        "vqav2_playing_cards": "configs/models/blip_vqa_v2_playing_cards.yaml"
     }
 
     def __init__(self, image_encoder, text_encoder, text_decoder, max_txt_len=35):

@@ -1,0 +1,31 @@
+model:
+  arch: blip_vqa
+  load_finetuned: True
+
+  finetuned: "/dccstor/llama-7b/output/BLIP/VQA_Playing_Cards/20230606093/checkpoint-x.pth"
+  pretrained: "/dccstor/llama-7b/output/BLIP/VQA_Playing_Cards/20230606093/checkpoint-x.pth"
+
+  # vit encoder
+  vit_type: "base"
+  vit_grad_ckpt: False
+  vit_ckpt_layer: 0
+  vit_drop_path_rate: 0.1
+
+  image_size: 480
+
+  # bert config
+  med_config_path: "configs/models/med_config.json"
+
+preprocess:
+    vis_processor:
+        train:
+          name: "blip_image_train"
+          image_size: 480
+        eval:
+          name: "blip_image_eval"
+          image_size: 480
+    text_processor:
+        train:
+          name: "blip_question"
+        eval:
+          name: "blip_question"
