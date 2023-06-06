@@ -23,4 +23,4 @@ datasets:
           storage:
               - playing_cards/annotations/test.json
       images:
-          storage: playing_cards/resized/
+          storage: playing_cards/images/
