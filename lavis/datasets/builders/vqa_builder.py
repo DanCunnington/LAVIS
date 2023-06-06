@@ -13,6 +13,14 @@ from lavis.datasets.datasets.coco_vqa_datasets import COCOVQADataset, COCOVQAEva
 from lavis.datasets.datasets.vg_vqa_datasets import VGVQADataset
 from lavis.datasets.datasets.gqa_datasets import GQADataset, GQAEvalDataset
 
+@registry.register_builder("playing_cards_vqa")
+class PlayingCardsVQABuilder(BaseDatasetBuilder):
+    train_dataset_cls = COCOVQADataset
+    eval_dataset_cls = COCOVQAEvalDataset
+
+    DATASET_CONFIG_DICT = {
+        "default": "configs/datasets/playing_cards/playing_cards_vqa.yaml"
+    }
 
 @registry.register_builder("coco_vqa")
 class COCOVQABuilder(BaseDatasetBuilder):

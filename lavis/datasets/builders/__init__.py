@@ -29,6 +29,7 @@ from lavis.datasets.builders.vqa_builder import (
     OKVQABuilder,
     VGVQABuilder,
     GQABuilder,
+    PlayingCardsVQABuilder,
 )
 from lavis.datasets.builders.retrieval_builder import (
     MSRVTTRetrievalBuilder,
@@ -57,6 +58,7 @@ __all__ = [
     "MSVDQABuilder",
     "NLVRBuilder",
     "OKVQABuilder",
+    "PlayingCardsVQABuilder",
     "SBUCaptionBuilder",
     "SNLIVisualEntailmentBuilder",
     "VATEXCapBuilder",
