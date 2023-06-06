@@ -1,8 +1,8 @@
 import pandas as pd 
-import shutil
 from sklearn.model_selection import train_test_split
 from pathlib import Path
 from os.path import join
+from PIL import Image
 
 data = pd.read_csv('raw/labels.csv')
 
@@ -27,7 +27,12 @@ def process_df(df, name):
 	Path(join('images', name)).mkdir(exist_ok=True)
 	for d in df.values:
 		im = d[0]
-		shutil.copyfile(join('raw', im), join('images', name, im))
+		# Resize image
+		img = Image.open(join('raw', im))
+		new_height = 480
+		new_width  = int(new_height * float(img.size[0]) / float(img.size[1]))
+		img = img.resize((new_width, new_height), Image.LANCZOS)
+		img.save(join('images', name, im))
 	df.to_csv(join('images', name, 'labels.csv'), index=None)
 
 process_df(train, 'train')
