@@ -11,16 +11,16 @@ datasets:
           url:
               - dan/playing_cards/annotations/train.json
           storage:
-              - .cache/playing_cards/annotations/train.json
+              - playing_cards/annotations/train.json
         val:
           url:
               - dan/playing_cards/annotations/val.json
           storage:
-              - .cache/playing_cards/annotations/val.json
+              - playing_cards/annotations/val.json
         test:
           url:
               - dan/playing_cards/annotations/test.json
           storage:
-              - .cache/playing_cards/annotations/test.json
+              - playing_cards/annotations/test.json
       images:
-          storage: .cache/playing_cards/resized/
+          storage: playing_cards/resized/

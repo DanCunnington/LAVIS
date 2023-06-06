@@ -156,3 +156,4 @@ debug*/
 cache/
 **/*.jpg
 **/*.DS_Store
+*.zip

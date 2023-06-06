@@ -16,7 +16,7 @@ from lavis.datasets.datasets.gqa_datasets import GQADataset, GQAEvalDataset
 @registry.register_builder("playing_cards_vqa")
 class PlayingCardsVQABuilder(BaseDatasetBuilder):
     train_dataset_cls = COCOVQADataset
-    eval_dataset_cls = COCOVQAEvalDataset
+    eval_dataset_cls = COCOVQADataset
 
     DATASET_CONFIG_DICT = {
         "default": "configs/datasets/playing_cards/playing_cards_vqa.yaml"

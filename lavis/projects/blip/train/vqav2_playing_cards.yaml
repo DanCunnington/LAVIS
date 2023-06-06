@@ -9,29 +9,21 @@ model:
   model_type: vqav2
   load_finetuned: True # Start from same model finetuned on COCO
 
-  image_size: 240
+  image_size: 480
 
 datasets:
   playing_cards_vqa: # name of the dataset builder
     vis_processor:
         train:
           name: "blip_image_train"
-          image_size: 240
+          image_size: 480
         eval:
           name: "blip_image_eval"
-          image_size: 240
+          image_size: 480
     text_processor:
         train:
           name: "blip_question"
         eval:
-          name: "blip_question"
-  vg_vqa: # name of the dataset builder
-    vis_processor:
-        train:
-          name: "blip_image_train"
-          image_size: 240
-    text_processor:
-        train:
           name: "blip_question"
 
 run:
