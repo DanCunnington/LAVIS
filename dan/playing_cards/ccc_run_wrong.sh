@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Handle command line arguments
-while getopts t: flag
+while getopts e:t: flag
 do
     case "${flag}" in
+    	e) NUM_EX=${OPTARG};;
         t) EX_TYPE=${OPTARG};;
     esac
 done
