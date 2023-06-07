@@ -77,7 +77,7 @@ def create_dataset(per_card_size, pct_correct):
             if idx >= point_to_perturb:
                 ac = copy.deepcopy(ALL_CARDS)
                 ac.remove(card)
-                new_label = random.choice(ALL_CARDS)
+                new_label = random.choice(ac)
             else:
                 new_label = card
             annotations += generate_annotations(c, new_label)
