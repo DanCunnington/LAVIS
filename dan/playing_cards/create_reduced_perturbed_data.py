@@ -4,7 +4,7 @@ import json
 import copy
 from os.path import join
 
-dataset_per_card_sizes = [40, 10, 1]
+dataset_per_card_sizes = [64, 40, 10, 1]
 pct_images_correct = [1.0, 0.8, 0.6, 0.4]
 ALL_CARDS = ['2h', '2s', '2c', '2d', '3h', '3s', '3c', '3d', '4h', '4s', '4c', '4d', '5h', '5s', '5c',
                  '5d', '6h', '6s', '6c', '6d', '7h', '7s', '7c', '7d', '8h', '8s', '8c', '8d', '9h', '9s',
