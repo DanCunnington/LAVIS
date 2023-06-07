@@ -32,7 +32,6 @@ class BaseModel(nn.Module):
 
         This should expect no mismatch in the model keys and the checkpoint keys.
         """
-
         print(url_or_filename)
         if is_url(url_or_filename):
             cached_file = download_cached_file(
