@@ -16,6 +16,7 @@ fi
 FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
 
 # Copy Lavis code to new instance
+echo "Copying code to new LAVIS directory: LAVIS_$FILENAME"
 cp -r /u/$USER/lavis_runs/LAVIS /u/$USER/lavis_runs/LAVIS_$FILENAME
 cd /u/$USER/lavis_runs/LAVIS_$FILENAME
 
@@ -31,6 +32,7 @@ cp lavis/projects/blip/train/vqav2_playing_cards_template.yaml lavis/projects/bl
 sed -i -e "s/<<FILENAME>>/${FILENAME}/g" lavis/projects/blip/train/$BLIP_CONFIG 
 
 # Activate python environment and run training
+echo "Running training..."
 source activate ilasp_python
 python train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
 
@@ -43,6 +45,7 @@ sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL
 
 
 # Run Test script and save result to output directory
+echo "Running testing...."
 pip install -e .
 cd dan
 python run_testing.py > $CHECKPOINT_DIR>test_set_accuracy_score.txt
