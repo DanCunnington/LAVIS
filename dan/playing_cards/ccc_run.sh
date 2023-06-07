@@ -34,7 +34,7 @@ sed -i -e "s/<<FILENAME>>/${FILENAME}/g" lavis/projects/blip/train/$BLIP_CONFIG
 # Activate python environment and run training
 echo "Running training..."
 source activate ilasp_python
-python train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
+python -u train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
 
 # Get the path of the results directory and set in the model config
 set -- /dccstor/llama-7b/output/BLIP/$FILENAME/*/
