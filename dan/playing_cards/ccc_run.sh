@@ -14,6 +14,11 @@ if [[ $PCT_CORRECT == "1" ]]; then
 	PCT_CORRECT="1.0"
 fi
 FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
+MODEL_SAVE_PARENT_DIR=/dccstor/llama-7b/output/BLIP/${FILENAME}
+if [ -d $MODEL_SAVE_PARENT_DIR ] ; then
+	echo "Removing existing model dir"
+	rm -fr $MODEL_SAVE_PARENT_DIR
+fi
 
 # Copy Lavis code to new instance
 echo "Copying code to new LAVIS directory: LAVIS_$FILENAME"
@@ -42,7 +47,7 @@ source activate ilasp_python
 python -u train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
 
 # Get the path of the results directory and set in the model config
-dirs=(/dccstor/llama-7b/output/BLIP/${FILENAME}/*/)
+dirs=($MODEL_SAVE_PARENT_DIR/*/)
 CHECKPOINT_DIR="${dirs[0]}"
 MODEL_CONFIG="blip_vqa_v2_playing_cards.yaml"
 cp lavis/configs/models/blip_vqa_v2_playing_cards_template.yaml lavis/configs/models/$MODEL_CONFIG

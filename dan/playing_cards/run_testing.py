@@ -109,12 +109,12 @@ def get_top_k_preds(raw_image, k=10):
     return best_cards[:k]
 
 def get_accuracy():
-    test_data = pd.read_csv('/u/dantc93/LAVIS/dan/playing_cards/images/test/labels.csv')
+    test_data = pd.read_csv('/u/dantc93/lavis_runs/images/test/labels.csv')
     correct = 0
     total = 0
     for ex in test_data.values:
         im, label = ex
-        raw_image = Image.open(f'/u/dantc93/LAVIS/dan/playing_cards/images/test/{im}').convert("RGB")
+        raw_image = Image.open(f'/u/dantc93/lavis_runs/images/test/{im}').convert("RGB")
         im_preds = get_top_k_preds(raw_image)
         best_pred = im_preds[0][0]
         if best_pred == label:
