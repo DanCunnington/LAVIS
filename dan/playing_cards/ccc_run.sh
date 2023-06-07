@@ -16,8 +16,8 @@ fi
 FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
 
 # Copy Lavis code to new instance
-cp -r /u/$USER/LAVIS /u/$USER/LAVIS_$FILENAME
-cd /u/$USER/LAVIS_$FILENAME
+cp -r /u/$USER/lavis_runs/LAVIS /u/$USER/lavis_runs/LAVIS_$FILENAME
+cd /u/$USER/lavis_runs/LAVIS_$FILENAME
 
 # Create new config file from template
 FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
