@@ -42,8 +42,8 @@ source activate ilasp_python
 python -u train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
 
 # Get the path of the results directory and set in the model config
-set -- /dccstor/llama-7b/output/BLIP/$FILENAME/*/
-CHECKPOINT_DIR=$1
+dirs=(/dccstor/llama-7b/output/BLIP/${FILENAME}/*/)
+CHECKPOINT_DIR="${dirs[0]}"
 MODEL_CONFIG="blip_vqa_v2_playing_cards.yaml"
 cp lavis/configs/models/blip_vqa_v2_playing_cards_template.yaml lavis/configs/models/$MODEL_CONFIG
 sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL_CONFIG
@@ -52,6 +52,6 @@ sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL
 # Run Test script and save result to output directory
 echo "Running testing...."
 pip install -e .
-cd dan
+cd dan/playing_cards
 python run_testing.py > $CHECKPOINT_DIR/test_set_accuracy_score.txt
 
