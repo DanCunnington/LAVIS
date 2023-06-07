@@ -17,8 +17,13 @@ FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
 
 # Copy Lavis code to new instance
 echo "Copying code to new LAVIS directory: LAVIS_$FILENAME"
-cp -r /u/$USER/lavis_runs/LAVIS /u/$USER/lavis_runs/LAVIS_$FILENAME
-cd /u/$USER/lavis_runs/LAVIS_$FILENAME
+FULL_PATH=/u/$USER/lavis_runs/LAVIS_$FILENAME
+if [ -f "$FULL_PATH" ] ; then
+	echo "Removing existing directory"
+    rm "$FULL_PATH"
+fi
+cp -r /u/$USER/lavis_runs/LAVIS $FULL_PATH
+cd $FULL_PATH
 
 # Create new config file from template
 FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
@@ -48,5 +53,5 @@ sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL
 echo "Running testing...."
 pip install -e .
 cd dan
-python run_testing.py > $CHECKPOINT_DIR>test_set_accuracy_score.txt
+python run_testing.py > $CHECKPOINT_DIR/test_set_accuracy_score.txt
 
