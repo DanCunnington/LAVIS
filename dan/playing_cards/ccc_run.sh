@@ -18,9 +18,9 @@ FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
 # Copy Lavis code to new instance
 echo "Copying code to new LAVIS directory: LAVIS_$FILENAME"
 FULL_PATH=/u/$USER/lavis_runs/LAVIS_$FILENAME
-if [ -f "$FULL_PATH" ] ; then
+if [ -d "$FULL_PATH" ] ; then
 	echo "Removing existing directory"
-    rm "$FULL_PATH"
+    rm -fr "$FULL_PATH"
 fi
 cp -r /u/$USER/lavis_runs/LAVIS $FULL_PATH
 cd $FULL_PATH
@@ -42,16 +42,16 @@ source activate ilasp_python
 python -u train.py --cfg-path lavis/projects/blip/train/$BLIP_CONFIG 
 
 # Get the path of the results directory and set in the model config
-dirs=(/dccstor/llama-7b/output/BLIP/${FILENAME}/*/)
-CHECKPOINT_DIR="${dirs[0]}"
-MODEL_CONFIG="blip_vqa_v2_playing_cards.yaml"
-cp lavis/configs/models/blip_vqa_v2_playing_cards_template.yaml lavis/configs/models/$MODEL_CONFIG
-sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL_CONFIG
+# dirs=(/dccstor/llama-7b/output/BLIP/${FILENAME}/*/)
+# CHECKPOINT_DIR="${dirs[0]}"
+# MODEL_CONFIG="blip_vqa_v2_playing_cards.yaml"
+# cp lavis/configs/models/blip_vqa_v2_playing_cards_template.yaml lavis/configs/models/$MODEL_CONFIG
+# sed -i -e "s/<<CHECKPOINT_DIR>>/${CHECKPOINT_DIR}/g" lavis/configs/models/$MODEL_CONFIG
 
 
-# Run Test script and save result to output directory
-echo "Running testing...."
-pip install -e .
-cd dan/playing_cards
-python run_testing.py > $CHECKPOINT_DIR/test_set_accuracy_score.txt
+# # Run Test script and save result to output directory
+# echo "Running testing...."
+# pip install -e .
+# cd dan/playing_cards
+# python run_testing.py > $CHECKPOINT_DIR/test_set_accuracy_score.txt
 
