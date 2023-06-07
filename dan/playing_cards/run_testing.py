@@ -3,6 +3,7 @@ from PIL import Image
 import os
 import pandas as pd
 from lavis.models import load_model_and_preprocess
+from tqdm import tqdm
 import random
 import numpy as np
 import tempfile
@@ -112,7 +113,7 @@ def get_accuracy():
     test_data = pd.read_csv('/u/dantc93/lavis_runs/images/test/labels.csv')
     correct = 0
     total = 0
-    for ex in test_data.values:
+    for ex in tqdm(test_data.values):
         im, label = ex
         raw_image = Image.open(f'/u/dantc93/lavis_runs/images/test/{im}').convert("RGB")
         im_preds = get_top_k_preds(raw_image)
