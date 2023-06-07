@@ -12,5 +12,10 @@ datasets:
               - dan/playing_cards/annotations/<<FILENAME>>
           storage:
               - playing_cards/annotations/<<FILENAME>>
+        test:
+          url:
+              - dan/playing_cards/annotations/test.json
+          storage:
+              - playing_cards/annotations/test.json
       images:
           storage: ../../images/
