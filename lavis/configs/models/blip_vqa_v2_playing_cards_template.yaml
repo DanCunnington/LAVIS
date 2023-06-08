@@ -2,8 +2,8 @@ model:
   arch: blip_vqa
   load_finetuned: True
 
-  finetuned: "<<CHECKPOINT_DIR>>checkpoint_9.pth"
-  pretrained: "<<CHECKPOINT_DIR>>checkpoint_9.pth"
+  finetuned: "<<CHECKPOINT_DIR>>checkpoint_19.pth"
+  pretrained: "<<CHECKPOINT_DIR>>checkpoint_19.pth"
 
   # vit encoder
   vit_type: "base"
