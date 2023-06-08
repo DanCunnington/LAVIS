@@ -61,5 +61,6 @@ sed -i -e "s#<<CHECKPOINT_DIR>>#${CHECKPOINT_DIR}#g" lavis/configs/models/$MODEL
 echo "Running testing...."
 export PYTHONPATH=$FULL_PATH
 cd dan/playing_cards
-python -u run_testing.py > $CHECKPOINT_DIR/test_set_accuracy_score.txt
+IMAGE_DIR="${prefix}images"
+python -u run_testing.py --image_dir $IMAGE_DIR > $CHECKPOINT_DIR/test_set_accuracy_score.txt
 

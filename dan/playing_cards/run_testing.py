@@ -9,6 +9,7 @@ import numpy as np
 import tempfile
 import subprocess
 import operator
+import argparse
 
 
 def get_answer_with_prob(im, q, ans_list):
@@ -110,12 +111,12 @@ def get_top_k_preds(raw_image, k=10):
     return best_cards[:k]
 
 def get_accuracy():
-    test_data = pd.read_csv('/u/dantc93/lavis_runs/images/test/labels.csv')
+    test_data = pd.read_csv(f'/u/dantc93/lavis_runs/{args.image_dir}/test/labels.csv')
     correct = 0
     total = 0
     for ex in tqdm(test_data.values):
         im, label = ex
-        raw_image = Image.open(f'/u/dantc93/lavis_runs/images/test/{im}').convert("RGB")
+        raw_image = Image.open(f'/u/dantc93/lavis_runs/{args.image_dir}/test/{im}').convert("RGB")
         im_preds = get_top_k_preds(raw_image)
         best_pred = im_preds[0][0]
         if best_pred == label:
@@ -126,7 +127,9 @@ def get_accuracy():
     print(correct / total)
 
 if __name__ == '__main__':
-	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    parser = argparse.ArgumentParser('--image_dir', default='images', help='image directory in lavis_runs folder to use for evaluation')
+	args = parser.parse_args()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	model, vis_processors, txt_processors = load_model_and_preprocess(name="blip_vqa", 
 		model_type="vqav2_playing_cards", is_eval=True, device=device)
 	get_accuracy()
