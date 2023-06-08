@@ -1,9 +1,12 @@
 import pandas as pd
 import json 
 from os.path import join
+from pathlib import Path
+
+prefix = ''
 
 def process_data(d_type):
-    data = pd.read_csv(f'images/{d_type}/labels.csv').values
+    data = pd.read_csv(f'{prefix}images/{d_type}/labels.csv').values
 
     annotations = []
 
@@ -48,7 +51,8 @@ def process_data(d_type):
                 if str(r) in label:
                     create_ann(10, 'which playing card rank is this?', str(r), im)
 
-    with open(join('annotations', f'{d_type}.json'), 'w') as outf:
+    Path(f'{prefix}annotations').mkdir(exist_ok=True)
+    with open(join(f'{prefix}annotations', f'{d_type}.json'), 'w') as outf:
         outf.write(json.dumps(annotations))
 
 process_data('train')

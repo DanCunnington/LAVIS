@@ -4,7 +4,8 @@ from pathlib import Path
 from os.path import join
 from PIL import Image
 
-data = pd.read_csv('raw/labels.csv')
+prefix = 'aca_'
+data = pd.read_csv(f'{prefix}raw/labels.csv')
 
 X = list(data['img'].values)
 y = list(data['label'].values)
@@ -24,7 +25,7 @@ val = pd.DataFrame({'img': X_val, 'label': y_val})
 
 
 def process_df(df, name):
-	Path(join('images', name)).mkdir(exist_ok=True)
+	Path(join(f'{prefix}images', name)).mkdir(exist_ok=True, parents=True)
 	for d in df.values:
 		im = d[0]
 		# Resize image
@@ -32,8 +33,8 @@ def process_df(df, name):
 		new_height = 480
 		new_width  = int(new_height * float(img.size[0]) / float(img.size[1]))
 		img = img.resize((new_width, new_height), Image.LANCZOS)
-		img.save(join('images', name, im))
-	df.to_csv(join('images', name, 'labels.csv'), index=None)
+		img.save(join(f'{prefix}images', name, im))
+	df.to_csv(join(f'{prefix}images', name, 'labels.csv'), index=None)
 
 process_df(train, 'train')
 process_df(val, 'val')

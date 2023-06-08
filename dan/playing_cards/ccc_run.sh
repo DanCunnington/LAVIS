@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # Handle command line arguments
-while getopts e:c: flag
+while getopts e:c:d: flag
 do
     case "${flag}" in
         e) NUM_EX=${OPTARG};;
         c) PCT_CORRECT=${OPTARG};;
+		d) DECK=${OPTARG};;
     esac
 done
 if [ -z $NUM_EX ]; then NUM_EX=3328; fi
 if [ -z $PCT_CORRECT ]; then PCT_CORRECT=1.0; fi
+if [ -z $DECK ]; then DECK=""; fi
 if [[ $PCT_CORRECT == "1" ]]; then
 	PCT_CORRECT="1.0"
 fi
@@ -35,6 +37,7 @@ FILENAME="${NUM_EX}_ex_${PCT_CORRECT}_correct"
 DATASET_CONFIG="playing_cards_vqa.yaml"
 cp lavis/configs/datasets/playing_cards/playing_cards_vqa_template.yaml lavis/configs/datasets/playing_cards/${DATASET_CONFIG}
 sed -i -e "s/<<FILENAME>>/train_${FILENAME}.json/g" lavis/configs/datasets/playing_cards/${DATASET_CONFIG}
+sed -i -e "s#../../images/#../../${DECK}images/#g" lavis/configs/datasets/playing_cards/${DATASET_CONFIG}
 
 # Create new projects/blip/train config with custom output dir
 BLIP_CONFIG="vqav2_playing_cards.yaml"
