@@ -26,7 +26,7 @@ dirs=($MODEL_SAVE_PARENT_DIR/*/)
 CHECKPOINT_DIR="${dirs[0]}"
 MODEL_CONFIG="blip_vqa_v2_playing_cards.yaml"
 cp lavis/configs/models/blip_vqa_v2_playing_cards_template.yaml lavis/configs/models/$MODEL_CONFIG
-# sed -i -e "s#<<CHECKPOINT_DIR>>#${CHECKPOINT_DIR}#g" lavis/configs/models/$MODEL_CONFIG
+sed -i -e "s#<<CHECKPOINT_DIR>>#${CHECKPOINT_DIR}#g" lavis/configs/models/$MODEL_CONFIG
 sed -i -e "s#checkpoint_9#checkpoint_19#g" lavis/configs/models/$MODEL_CONFIG
 
 
