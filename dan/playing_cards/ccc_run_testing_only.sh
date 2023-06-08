@@ -33,7 +33,7 @@ sed -i -e "s#checkpoint_9#checkpoint_19#g" lavis/configs/models/$MODEL_CONFIG
 # Run Test script and save result to output directory
 echo "Running testing...."
 export PYTHONPATH=$FULL_PATH
-IMAGE_DIR="${prefix}images"
+IMAGE_DIR="${DECK}images"
 cd dan/playing_cards
 python -u run_testing.py --image_dir $IMAGE_DIR > $CHECKPOINT_DIR/test_set_accuracy_score.txt
 
