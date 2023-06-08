@@ -29,7 +29,7 @@ def process_df(df, name):
 	for d in df.values:
 		im = d[0]
 		# Resize image
-		img = Image.open(join('raw', im))
+		img = Image.open(join(f'{prefix}raw', im))
 		new_height = 480
 		new_width  = int(new_height * float(img.size[0]) / float(img.size[1]))
 		img = img.resize((new_width, new_height), Image.LANCZOS)
