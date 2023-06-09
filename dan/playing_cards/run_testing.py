@@ -127,10 +127,11 @@ def get_accuracy():
     print(correct / total)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('--image_dir', default='images', help='image directory in lavis_runs folder to use for evaluation')
-	args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--image_dir', default='images', help='image directory in lavis_runs folder to use for evaluation')
+    args = parser.parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-	model, vis_processors, txt_processors = load_model_and_preprocess(name="blip_vqa", 
-		model_type="vqav2_playing_cards", is_eval=True, device=device)
-	get_accuracy()
+    model, vis_processors, txt_processors = load_model_and_preprocess(name="blip_vqa", 
+        model_type="vqav2_playing_cards", is_eval=True, device=device)
+    get_accuracy()
 
